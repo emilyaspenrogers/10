@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,8 +39,7 @@ namespace ERogersProgram10
             PropertyLocation = location;
 
             BuildingAge = DateTime.Now.Year - year;
-            CalculateTotalPropertyTax();
-   
+            TotalPropertyTax = CalculateTotalPropertyTax();
         }
 
         #endregion
@@ -136,11 +135,13 @@ namespace ERogersProgram10
             }
 
         }
-
         private decimal CalculateTotalPropertyTax()
         {
-            
+            decimal TotalPropertyTax; 
 
+            TotalPropertyTax = BuildingTax + LandTax - BuildingTax - LandTaxDeduction;
+
+            return TotalPropertyTax;
         }
 
         #endregion
