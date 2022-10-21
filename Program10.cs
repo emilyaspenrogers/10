@@ -112,4 +112,3 @@ namespace ERogersProgram10
         }
     }
 }
-//building age, buiding tax, land tax, buiding tax deduction, land tax deduction, total property tax
