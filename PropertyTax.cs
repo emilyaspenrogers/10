@@ -39,7 +39,7 @@ namespace ERogersProgram10
             PropertyLocation = location;
 
             BuildingAge = DateTime.Now.Year - year;
-            TotalPropertyTax = CalculateTotalPropertyTax(BuildingTax, LandTax, BuildingTaxDeduction, LandTaxDeduction);
+            TotalPropertyTax = CalculateTotalPropertyTax();
         }
 
         #endregion
@@ -48,7 +48,6 @@ namespace ERogersProgram10
 
         private void CalculateBuildingTax(int buildingSqFt)
         {
-            decimal BuildingTax; 
 
             if (buildingSqFt >= 1 && buildingSqFt <= 1000)
             {
@@ -75,8 +74,7 @@ namespace ERogersProgram10
 
         private void CalculateLandTax (int landSqFt)
         {
-            decimal LandTax;
-
+            
             if (landSqFt >= 1 && landSqFt <= 10000)
             {
                 LandTax = .06M * landSqFt;
@@ -103,7 +101,6 @@ namespace ERogersProgram10
         private void CalculateBuildingTaxDeduction(int buildingAge, decimal buildingTax)
         {
          
-            decimal BuildingTaxDeduction; 
 
             if (BuildingAge > 12)
             {
@@ -135,12 +132,16 @@ namespace ERogersProgram10
             }
 
         }
-        private decimal CalculateTotalPropertyTax(decimal buildingTax, decimal landTax,decimal buildingTaxDeduction, decimal landTaxDeduction)
+        private decimal CalculateTotalPropertyTax()
         {
-            decimal TotalPropertyTax;
-     
-
-            TotalPropertyTax = buildingTax + landTax - buildingTaxDeduction - landTaxDeduction;
+         
+            // we are asked to, in this method do the following which I'm not sure how to do: 
+            //To call the private methods that calculate and set the building and land taxes 
+            //To conditionally (i.e., if the building age > 12) call the method that calculates and sets the building tax deduction 
+            //To conditionally (i.e., if the property’s location is rural) call the method that calculates and sets the land tax deduction 
+            //To calculate and set the total property tax (building tax + land tax – building tax deduction – land tax deduction).  
+            
+            TotalPropertyTax = BuildingTax + LandTax - BuildingTaxDeduction - LandTaxDeduction;
 
             return TotalPropertyTax;
         }
