@@ -7,9 +7,9 @@ namespace ERogersProgram10
     #region "Enumeration"
     public enum LocationType
     {
-        City = 1,
-        Suburb = 2,
-        Rural = 3
+        City,
+        Suburb,
+        Rural
     }
     #endregion
     class PropertyTax
@@ -39,7 +39,7 @@ namespace ERogersProgram10
             PropertyLocation = location;
 
             BuildingAge = DateTime.Now.Year - year;
-            TotalPropertyTax = CalculateTotalPropertyTax();
+            TotalPropertyTax = CalculateTotalPropertyTax(BuildingTax, LandTax, BuildingTaxDeduction, LandTaxDeduction);
         }
 
         #endregion
@@ -100,14 +100,14 @@ namespace ERogersProgram10
 
         }
 
-        private void CalculateBuildingTaxDeduction(int BuildingAge, decimal BuildingTax)
+        private void CalculateBuildingTaxDeduction(int buildingAge, decimal buildingTax)
         {
          
             decimal BuildingTaxDeduction; 
 
             if (BuildingAge > 12)
             {
-                BuildingTaxDeduction = BuildingAge * ((decimal)(Convert.ToDouble(.005)) * BuildingTax);
+                BuildingTaxDeduction = buildingAge * ((decimal)(Convert.ToDouble(.005)) * buildingTax);
             }
             else
             {
@@ -116,17 +116,17 @@ namespace ERogersProgram10
 
         }
 
-        private void CalculateLandTaxDeduction(decimal landSqFt, decimal LandTax)
+        private void CalculateLandTaxDeduction(decimal landSqFt, decimal landTax)
         {
             if (PropertyLocation == LocationType.Rural)
             {
                 if (landSqFt <= 25000)
                 {
-                    LandTaxDeduction = (decimal)(Convert.ToDouble(.0235)) * LandTax;
+                    LandTaxDeduction = (decimal)(Convert.ToDouble(.0235)) * landTax;
                 }
                 else if (landSqFt > 25000)
                 {
-                    LandTaxDeduction = (decimal)(Convert.ToDouble(.0165)) * LandTax; 
+                    LandTaxDeduction = (decimal)(Convert.ToDouble(.0165)) * landTax; 
                 }
                 else
                 {
@@ -135,11 +135,12 @@ namespace ERogersProgram10
             }
 
         }
-        private decimal CalculateTotalPropertyTax()
+        private decimal CalculateTotalPropertyTax(decimal buildingTax, decimal landTax,decimal buildingTaxDeduction, decimal landTaxDeduction)
         {
-            decimal TotalPropertyTax; 
+            decimal TotalPropertyTax;
+     
 
-            TotalPropertyTax = BuildingTax + LandTax - BuildingTax - LandTaxDeduction;
+            TotalPropertyTax = buildingTax + landTax - buildingTaxDeduction - landTaxDeduction;
 
             return TotalPropertyTax;
         }
